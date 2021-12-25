@@ -33,7 +33,7 @@ export interface GroupProvide {
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
-  items: Ref<number[]>
+  items: Ref<{ id: number, value: unknown, disabled: boolean | undefined }[]>
   disabled: Ref<boolean | undefined>
 }
 
@@ -270,7 +270,7 @@ export function useGroup (
     next: () => step(1),
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
-    items: computed(() => items.map(({ id }) => id)),
+    items: computed(() => items),
   }
 
   provide(injectKey, state)
